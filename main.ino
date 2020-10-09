@@ -1,5 +1,6 @@
 // Include the Stepper library:
 #include <Stepper.h>
+#include <HardwareSerial.h>
 // Define number of steps per revolution:
 const int stepsPerRevolution = 200;
 // Give the motor control pins names:
@@ -26,9 +27,10 @@ void setup() {
   digitalWrite(brakeB, LOW);
   // Set the motor speed (RPMs):
   myStepper.setSpeed(60);
+  Serial.begin(9600);
 }
 void loop() {
-    while (run_stepper == true){  
+    if (run_stepper == true){  
         // Step one revolution in one direction:
         myStepper.step(200);
         delay(2000);
@@ -39,10 +41,15 @@ void loop() {
     //read in serial data 
     if (Serial.available() > 0){
         incomingByte = Serial.read();
+        Serial.println(incomingByte);
     }
 
-    if (incomingByte == 13){
-        run_stepper = true;
+    if (incomingByte == 10){
+        if (run_stepper == false)
+            run_stepper = true;
+        else if (run_stepper == true)
+            run_stepper = false;
+        
         incomingByte = 0; //just ot reset the Byte
     }
 
