@@ -1,21 +1,22 @@
+#include "./Include/Motor.h"
+#include "./Include/UI.h"
 
 int incomingByte = 0;
-int motor_speed = 0;
 
-void setup() {
-    UI.being();
-    Motor.begin()
+void setup() {    
+    Motor_InitPins();
     Serial.begin(9600);
+    UI_StartMessage();
 }
 
 void loop(){
     //read in serial data 
     if (Serial.available() > 0){
+        
         incomingByte = Serial.read();
         Serial.println(incomingByte);
-        if (incomingByte <= 100 && incomingByte >= -100){
-            motor_speed = UI.motor_input(incomingByte);
-            Motor.move(motor_speed);
-        }
+        
+        motor_speed = UI_MapMotorSpeed(incomingByte);
+        Motor_move(motor_speed);
     }
 }
