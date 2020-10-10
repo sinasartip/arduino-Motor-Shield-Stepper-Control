@@ -1,7 +1,9 @@
 #include "./Include/Motor.h"
 #include "./Include/UI.h"
+#include <Stepper.h>
 
 int incomingByte = 0;
+
 
 void setup() {    
     Motor_InitPins();
