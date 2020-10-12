@@ -26,6 +26,7 @@ void serial_write(String message[],int size){
 int readin_speed(){
     char incomingByte;
     incomingByte = Serial.read();
+    Serial.print(incomingByte);
 
     return(atoi(&incomingByte));
 }

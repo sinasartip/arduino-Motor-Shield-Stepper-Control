@@ -34,5 +34,6 @@ void ConnectMotorShield(){
 
 void motor_move(int speed){
     myStepper.setSpeed(speed);
+    myStepper.step(200);
 }
 
