@@ -1,28 +1,31 @@
-#include "./Include/Motor.h"
-#include "./Include/UI.h"
-#include <Stepper.h>
+void welcomeMessage();
+void serial_write(String);
 
-int incomingByte = 0;
+int main(){
+    //enter setup values
+    welcomeMessage();
 
 
-void setup() {    
-    Motor_InitPins();
-    Serial.begin(9600);
-    UI_StartMessage();
+
+
+
+    bool control_loop_isActive = true;
+    while(control_loop_isActive){
+
+    }
+
+    return 0;
 }
 
-void loop(){
-    //read in serial data 
-    Serial.println("in loop");
-    if (Serial.available() > 0){
-        Serial.println("reading byte");
-        incomingByte = Serial.read();
-        Serial.println(incomingByte);
-        
-        motor_speed = UI_MapMotorSpeed(incomingByte);
-        Serial.println("mapped speed");
-        Motor_move(motor_speed);
-        Serial.println("end of control!");
-    }
-    delay(20);
+void welcomeMessage(){
+    
+    String welcome = "You are in stepper_speed_control./nsend speed percent.0";
+    serial_write(welcome);
+}
+
+void serial_write(String message){    
+    
+    Serial.begin(9600); //Baud-Rate
+    Serial.println(message);
+
 }
