@@ -1,7 +1,7 @@
 #include <Stepper.h>
 
 
-Stepper myStepper = Stepper(100, 10, 10);;
+Stepper myStepper = Stepper(100, 10, 10);
 
 
 
@@ -28,12 +28,12 @@ void ConnectMotorShield(){
 
     // Set the motor speed (RPMs):
     myStepper = Stepper(stepsPerRevolution, dirA, dirB);
-    myStepper.setSpeed(0);
+    myStepper.setSpeed(60);
     
 }
 
 void motor_move(int speed){
-    myStepper.setSpeed(speed);
+    
     myStepper.step(200);
 }
 
